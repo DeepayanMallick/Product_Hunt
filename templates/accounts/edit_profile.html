@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h2 class="text-center">Edit Profile</h2>
+<div class="col-md-6 offset-md-3">
+    <form method="POST" action="{% url 'edit_profile' %}">
+        {% csrf_token %}
+        {{ form|crispy }}
+        
+        <input type="submit" value="Edit Prfile" class="btn btn-secondary">
+    </form>
+    <br>
+    <p><small><strong><a href="{% url 'change_password' %}">Click Here</a></strong> To Change Your Password</small></p>
+</div>
+{% endblock %}

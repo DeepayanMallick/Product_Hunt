@@ -1,0 +1,61 @@
+{% load static %} 
+<header>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+          <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'img/logo.png' %}" height="25" width="25" class="d-inline-block align-top">
+            Product Hunt
+          </a>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              {% if user.is_authenticated %}
+                <li           
+                {% if 'create' in request.path %}
+                  class="nav-item active"
+                {% else %}
+                  class="nav-item"
+                {% endif %}
+              >                  
+                  <a class="nav-link" href="{% url 'create' %}">Create</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="{% url 'profile' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ user.first_name }}
+                  </a>
+                  <!-- <a class="nav-link" href="{% url 'home' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{% static 'img/deepayan.jpg' %}" height="25" width="25" class="rounded-circle align-top">
+                    {{ user.first_name }}   
+                  </a> -->
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'profile' %}">My Profile</a>
+                    <a class="dropdown-item" href="{% url 'edit_profile' %}">Edit Profile</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'change_password' %}">Change Password</a>
+                    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                  </div>
+                </li>
+
+              {% else %}
+                <li 
+                {% if 'accounts/login/' in request.path %}
+                  class="nav-item active"
+                {% else %}
+                  class="nav-item"
+                {% endif %}
+                >
+                  <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+                <li
+                {% if 'accounts/register/' in request.path %}
+                  class="nav-item active"
+                {% else %}
+                  class="nav-item"
+                {% endif %}
+                >
+                  <a class="nav-link" href="{% url 'register' %}">Register</a>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+      </div>
+    </nav>
+</header>
